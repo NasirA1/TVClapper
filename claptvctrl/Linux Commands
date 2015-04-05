@@ -1,0 +1,22 @@
+Find out where apt-get install installed software:
+dpkg -L libssl-dev
+
+Pagination:
+dpkg -L libssl-dev | less
+
+To exit less:
+q
+
+
+
+Go back to previous location:
+cd -
+
+Home folder:
+cd ~
+
+root folder:
+cd /
+
+root user:
+sudo -s

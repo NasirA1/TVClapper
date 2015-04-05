@@ -1,0 +1,41 @@
+#Compiler/Linker settings
+CC = cl
+CFLAGS = /nologo
+LFLAGS = /nologo
+
+#Directories
+INCDIR = include
+SRCDIR = source
+OBJDIR = obj
+BINDIR = bin
+
+#Paths
+SOURCES    = $(wildcard $(SRCDIR)/*.cpp)
+OBJECTS    = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.obj,$(SOURCES)) 
+EXECUTABLE = $(BINDIR)\IRParser.exe
+
+
+##### INFO #######
+$(info GNU Make Started...)
+
+
+##### Targets ######
+all : $(EXECUTABLE)
+
+$(EXECUTABLE) : $(OBJECTS)
+	@echo Building $@...
+	@echo Linking $(OBJECTS)...
+	@$(CC) $(LFLAGS) $(OBJECTS) /Fe$@
+	@echo Build Successful!
+
+$(OBJDIR)/%.obj : $(SRCDIR)/%.cpp
+	@echo Compiling $<...
+	@$(CC) $(CFLAGS) /c -I$(INCDIR) $< /Fo$@
+
+
+.PHONY: clean
+
+clean:
+	@echo Cleaning Solution...
+	@del /q /s $(OBJDIR)\*.*
+	@del /q /s $(EXECUTABLE)

@@ -1,0 +1,51 @@
+How to load USB stick:
+======================
+First we need to find out where our system locates the device. With the USB device not plugged in, type…
+tail -f /var/log/messages
+
+Then plug in your USB device and, looking in the new lines which appear, make a note of the ID – it 
+will be something like sda1, sdb1, sda2, sdb2 etc.
+
+Next, we need to create a directory under /media, so you will be able to mount your drive.
+
+sudo mkdir /usbstick
+sudo mount -t vfat -o rw /dev/sda1 usbstick
+cd usbstick
+ls -l
+
+sudo umount usbstick
+
+
+How to get sound:
+=================
+1. start-up the Raspberry Pi and let it set itself up (normal set-up)
+2. After you have gone through normal set-up:
+     a. Log-in as a normal user (debian image: pi)
+     b. Type the command: "sudo nano /boot/config.txt "
+     c. Press enter
+     d. Type in: "hdmi_drive=2 " [exactly as it is here]
+     e. Then press crtl + o
+     f.  Press Enter
+     g. then press crtl + x
+3. Restart using the command: " sudo shutdown -r now "
+
+
+Play video:
+===========
+Play a full screen 1080p video, and outputting sound via HDMI:
+
+    omxplayer -o hdmi /path/to/FeelGoodPeterLondonAndCrew.mp4
+
+
+
+Speech Recognition:
+===================
+http://www.aonsquared.co.uk/raspi_voice_control
+
+
+
+
+
+
+
+

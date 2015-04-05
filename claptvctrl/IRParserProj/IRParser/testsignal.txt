@@ -1,0 +1,21 @@
+received 1 signal(s):
+  space: 152917
+received 1 signal(s):
+  space: 152917
+received 1 signal(s):
+  space: 114688
+received 4 signal(s):
+  space: 6400
+  pulse: 3498
+  space: 1664
+  pulse: 426
+received 7 signal(s):
+  space: 384
+  pulse: 448
+  space: 1237
+  pulse: 426
+  space: 405
+  pulse: 426
+  space: 362
+received 7 signal(s):
+

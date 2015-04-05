@@ -1,0 +1,16 @@
+unsigned int signal[] = {
+	152917,
+	152917,
+	114688,
+	6400,
+	3498 | IG_PULSE_BIT,
+	1664,
+	426 | IG_PULSE_BIT,
+	384,
+	448 | IG_PULSE_BIT,
+	1237,
+	426 | IG_PULSE_BIT,
+	405,
+	426 | IG_PULSE_BIT,
+	362,
+};

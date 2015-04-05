@@ -1,0 +1,161 @@
+
+****************************** LINKS ***************************************
+
+http://iguanaworks.net/projects/IguanaIR/wiki/GettingStarted
+http://iguanaworks.net/projects/IguanaIR/
+http://mutsuda.com/2012/09/07/raspberry-pi-into-an-audio-spying-device/
+http://linux.die.net/man/1/aplay
+http://james.ahlstrom.name/alsa_names.html
+
+****************************************************************************
+
+
+
+//Compile PortAudio Project
+gcc record.c -lrt -lasound -pthread -lportaudio -o x
+
+
+//IR Transceiver server start
+sudo /etc/init.d/iguanaIR start
+
+//Compile Iguana-IR Project
+gcc vol.c  /usr/lib/libiguanaIR.so -o x
+
+
+//Compile PortAudio+Iguana-IR
+gcc clponoff.c -lrt -lasound -pthread -lportaudio /usr/lib/libiguanaIR.so -o clponoff
+
+
+#simple sound test
+ speaker-test -c 2 -t wav
+ 
+ #check alsa version
+ /proc/asound/version
+ 
+#check library version
+grep VERSION_STR /usr/include/alsa/version.h
+ 
+#to compile & link
+gcc paex_record.c -lasound -pthread  -lportaudio -o test
+  
+#installing portaudio
+sudo apt-get install libasound-dev
+  
+./configure && make
+  
+make install
+  
+cp lib/.libs/libportaudio.a /YOUR/PROJECT/DIR
+  
+#Linux Debugging
+#Eliot Blennerhassett writes:
+#On linux build, use e.g. "libtool gdb bin/patest_sine8" to debug that program. This is because on linux bin/patest_sine8 is a #libtool shell script 
+that wraps bin/.libs/patest_sine8 and allows it to find the appropriate libraries within the build tree.
+
+
+############  Sound settings supported by the RaspPi #################
+Unsigned 8 bit, SampleRate 8000, Mono
+
+
+############### Sound recording ####################
+sudo modprobe snd_bcm2835
+arecord -D plughw:1,0 test.wav
+aplay test.wav
+
+
+#login as normal user
+user: pi
+pwd:  raspberry
+
+#login as root
+sudo su
+
+
+#Mounting usb stick on the Pi
+tail -f /var/log/messages
+
+sudo mkdir /media/usbstick #usbstick can be whatever you want to call it
+
+#If you are logged in as root…
+mount -t vfat -o rw /dev/sda1 /media/usbstick/
+
+#If you are logged in as the default Raspberry Pi debian user, pi, you will need to use…
+sudo mount -t vfat -o uid=pi,gid=pi /dev/sda1 /media/usbstick/
+
+#Then you can go there and have a look…
+cd /media/usbstick
+ls -l 
+
+#make and copy directory
+mkdir -p dir1/dir2/dir3
+cp -r /home/hope/files/* /home/hope/backup
+
+
+#Installing .deb package
+dpkg -i package-file-name
+
+
+//Compile PortAudio Project
+gcc record.c -lrt -lasound -pthread -lportaudio -o x
+
+
+//IR Transceiver server start
+sudo /etc/init.d/iguanaIR start
+
+//Compile Iguana-IR Project
+gcc vol.c  /usr/lib/libiguanaIR.so -o x
+
+
+//Compile PortAudio+Iguana-IR
+gcc clponoff.c -lrt -lasound -pthread -lportaudio /usr/lib/libiguanaIR.so -o clponoff
+
+
+#Redirect stdout and stderr to file
+./out 3>&1 1>&2 2>&3 | tee stderr.txt
+
+#Settings on the PI are:
+SampleRate 24000, Channels=1, 16Bit Signed
+
+
+
+
+Auto-login and auto-start app on Raspberry Pi Startup
+========================================================
+Log into your Pi, then type:
+
+sudo nano /etc/inittab
+
+
+Look for the line:
+    1:2345:respawn:/sbin/ getty 115200 tty1
+
+
+Just add a "#" infront of it to disable it:
+#1:2345:respawn:/sbin/ getty 115200 tty1
+
+
+Add this line under it:
+1:2345:respawn:/bin/login -f pi tty1</dev/tty1>/dev/tty1 2>&1
+
+
+Hit CTRL + X and Y to save.
+
+Type:
+sudo nano ~/.bash_profile
+
+
+Type:
+[whatever commands you wish to be executed at start up...]
+
+
+Hit CTRL + X and Y to save.
+Now:
+
+sudo reboot
+It should now boot automatically
+
+###########################################################
+
+
+
+
